@@ -164,6 +164,12 @@ runs:
         cache: ${{ inputs.build-cache }}
         cache-dependency-path: 'go.sum'
         go-version: ${{ inputs.go-version }}
+    - name: Setup Node
+      uses: actions/setup-node@v6
+      if: inputs.wails-dev-build == 'false'
+      with:
+        cache: ${{ inputs.build-cache }}
+        node-version: ${{ inputs.node-version }}
     - name: Install Garble
       if: inputs.build-obfuscate == 'true'
       run: go install mvdan.cc/garble@latest
