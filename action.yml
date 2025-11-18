@@ -1,4 +1,4 @@
-name: "Wails Build Action"
+name: "Next Wails Build Action"
 description: "Creates a wails binary"
 branding:
   icon: 'box'
