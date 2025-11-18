@@ -202,7 +202,13 @@ runs:
       env:
         BUILD_OPTIONS: ${{ steps.build_options.outputs.BUILD_OPTIONS }}
       working-directory: ${{ inputs.app-working-directory }}
-      run: wails build --platform ${{inputs.build-platform}} -webview2 ${{inputs.wails-build-webview2}} -o ${{inputs.build-name}} $BUILD_OPTIONS
+      run: |
+        set +e
+        wails build --platform ${{inputs.build-platform}} -webview2 ${{inputs.wails-build-webview2}} -o ${{inputs.build-name}} $BUILD_OPTIONS
+        set -e
+        echo ">>>check log>>>"
+        ls ~/.npm/_logs/*.log | xargs -I {} cat {}
+        echo ">>>check log finished>>>"
       shell: bash
     - name: Add macOS perms
       if: inputs.build == 'true' && runner.os == 'macOS'
