@@ -168,7 +168,7 @@ runs:
       uses: actions/setup-node@v6
       if: inputs.wails-dev-build == 'false'
       with:
-        cache: ${{ inputs.build-cache }}
+        package-manager-cache: true
         node-version: ${{ inputs.node-version }}
     - name: Install Garble
       if: inputs.build-obfuscate == 'true'
